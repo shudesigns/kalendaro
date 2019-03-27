@@ -5,9 +5,9 @@ A simple, easily-customized jQuery plugin to create calendars.
 ### Set Up
 Add the links to the CSS files in your `<head> `
 ```html
-<link rel="stylesheet" type="text/css" href="kaledanro.css" />
+<link rel="stylesheet" type="text/css" href="kalendaro.css" />
 <!-- if you want to use the default theme -->
-<link rel="stylesheet" type="text/css" href="kaledanro.theme.css" />
+<link rel="stylesheet" type="text/css" href="kalendaro.theme.css" />
 ```
 And then add the js file after jQuery before `</body>`
 ```html
@@ -55,3 +55,90 @@ Please note that the format for `event-date` must be `mmdd`. You can define each
 | dayNamesMin     | array   | `[ "Su","Mo","Tu","We","Th","Fr","Sa" ]` | The list of minimised day names, starting from Sunday |
 | disableMonths   | array   | null      | Disable certain month(s) if you wish. For example: `[1, 10]` (hide January and October) |
 | events          | array   | null      | Configure your calendar events settings. See examples below. |
+
+### Calendar Events Options
+| Name       | type   | default | Description |
+| ---------- | ------ | ------- | ----------- |
+| eventType  | string |         | The name of your event type |
+| eventColor | string |         | The background color of each event day if you need |
+| eventClass | string |         | The custom class for the event if you need |
+
+Here's an example:
+```javascript
+$('#myCalendar').kalendaro({
+  events: [
+    {
+      eventType: 'holiday',
+      eventColor: '#ffe4ba',
+      eventClass: '.event-holiday'
+    },
+    {
+      eventType: 'important',
+      eventColor: '#ffd3d3',
+      eventClass: '.event-important'
+    },
+    {
+      eventType: 'birthday',
+      eventColor: '#d4fbfc',
+      eventClass: '.event-birthday'
+    }
+    // add as many as you want
+  ]
+});
+```
+
+## Methods
+
+### addEvent
+Add an event to the calendar.
+
+| Argument     | Type   | Description |
+| ------------ | ------ | ----------- |
+| date         | string | The date of the event. Should be written in `mmdd` format |
+| type         | string | The type of the event. |
+| eventContent | string | The content of the event. |
+
+Example:
+```javascript
+$('#myCalendar').kalendaro('addEvent', '0101', 'holiday', 'Happy new year');
+```
+---
+### removeEvent
+Remove an event from the calendar.
+
+| Argument     | Type   | Description |
+| ------------ | ------ | ----------- |
+| date         | string | The date of the event. Should be written in `mmdd` format |
+
+Example:
+```javascript
+$('#myCalendar').kalendaro('removeEvent', '0101');
+```
+---
+### goToMonth
+Scroll to the targeted month.
+
+| Argument | Type   | Description |
+| -------- | ------ | ----------- |
+| month    | number | The targeted month. `1` equals to January, `2` equals to February, etc. |
+
+Example:
+```javascript
+$('#myCalendar').kalendaro('goToMonth', 1);
+```
+---
+### update
+Update the element inner content. Useful when new calendar events are being added manually.
+
+Example:
+```javascript
+$('#myCalendar').kalendaro('update');
+```
+---
+### destroy
+Remove the kalendaro function completely. This will return the element back to its pre-init state.
+
+Example:
+```javascript
+$('#myCalendar').kalendaro('destroy');
+```
